@@ -1,0 +1,19 @@
+{
+  "name": "nodejs-demo",
+  "version": "1.0.0",
+  "main": "01-file-dir-name.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/niedan123/demo-node.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/niedan123/demo-node/issues"
+  },
+  "homepage": "https://github.com/niedan123/demo-node#readme",
+  "description": ""
+}

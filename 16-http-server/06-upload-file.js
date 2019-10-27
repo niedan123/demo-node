@@ -21,13 +21,13 @@ http.createServer((req,res)=>{
     //get file name
 
     var filename=qs.parse(fl.split('\r\n')[1].split(';')[2].trim()).filename;
-  filename = filename.slice(1,filenam.length-1)
+  filename = filename.slice(1,filename.length-1)
   log(filename);
   var filedata = fl.split('\r\n')[4];
   log(filedata);
   //step 2:save file
 
-   fs.writeFileSync(filename,fildata,{'encoding':'binary'})
+   fs.writeFileSync(filename,filedata,{'encoding':'binary'})
   })
 
   req.pipe(process.stdout);

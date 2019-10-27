@@ -2,14 +2,12 @@
 
 const log = console.log;
 log('CPU',process.arch);
-log('OS',process.platform);
+log('OS:%s\n',process.platform);
 log('PID',process.pid);
-log('execPath',process.execPath);
+log('execPath:%s\n',process.execPath);
 
 log('node.js ver:',process.version);
 log('uid',process.getuid());
 log('git,',process.getuid());
-/*process.stdin.on('data',function(data){
+log('cwd:%s\n',process.cwd());
 
-  console.log(data);
-});*/

@@ -1,6 +1,6 @@
 #!/usr/bin/node
 
-const Radio = require('./03-radio');
+const Radio = require('./05-radio');
 
 const station = {
   freq :'106.7',
