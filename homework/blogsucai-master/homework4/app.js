@@ -23,7 +23,6 @@ app.get('/login', function(req, res){
 });
 app.post('/login', function(req, res){
     var count = 1;
-    console.log(req.body.username)
     if(req.body.username == 'zhangsan' && req.body.pwd == '123'){
         if(typeof req.headers['cookie'] === 'undefined') {
             count = 1;
@@ -32,7 +31,7 @@ app.post('/login', function(req, res){
             count = Number(pair[1]) + 1;
           }
           res.setHeader('Set-cookie', `count=${count}; max-age=10000000`);
-          res.end(`<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>状态保持</title></head><body><h1>你这是第 ${count} 次访问本网站！</h1></body></html>`);
+          res.end(`<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>状态保持</title></head><body><h1>${req.body.username}你这是第 ${count} 次访问本网站！</h1></body></html>`);
     }
 });
 app.listen(8081,function(){});
