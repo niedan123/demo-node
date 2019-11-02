@@ -15,5 +15,8 @@
     "url": "https://github.com/niedan123/demo-node/issues"
   },
   "homepage": "https://github.com/niedan123/demo-node#readme",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "mysql": "^2.17.1"
+  }
 }

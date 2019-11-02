@@ -1,61 +1,70 @@
 #!/usr/bin/node
-
 const http = require('http'),
-      url = require('url'),
-      qs = require('querystring');
-      log = console.log;
-var items = ['eat'];
-http.createServer((req,res)=>{
-  log(`${req.method} ${req.url} HTTP/${req.httpVersion}`);
-  log(req.headers);
-  log();
+      fs   = require('fs'),
+      qs   = require('querystring');
 
-  req.pipe(process.stdout);
-    
+var items = [];
 
+http.createServer(function(req, res) {
+    if(req.url != '/') { return err(res);  }
 
-  if(req.method==='GET'&& req.url === '/'){
-    //200 ok
-    res.writeHead(200,{'Content-Type':'text/html'});
-    res.end(getHTML());
-  }else if(req.method === 'POST'&& req.url == '/'){
-    //submit data
-    var it = '';
-    req.on('data',(data)=>{
-      it += data;
-    })
-    req.on('end',()=>{
-      if(typeof it !== 'undefined' ){
-        items.push(qs.parse(it).item);
-      }
-      res.end(getHTML());
-  })
-       
-  }else{
-    //error
-    res.end('error!');
-  }
+      console.log(req.headers);
+        console.log('');
 
- }).listen(8080);
+        switch(req.method) {
+              case 'GET':
+                      show(res);
+                            break;
 
-function getHTML(){
- return  html = ''
-  +'<!DOCTYPE html>'
-  +'<html lang="en">'
-  +'<head>'
-  +'<meta charset="UTF-8">'
-  +'<title>TODO List</title>'
-  +'<head>'
-  +'<body>'
-  +'<h1>TODO List </h1>'
-  +'<ul>'
-  +items.map(function(it){return '<li>'+it+'</li>'}).join('\n')
-  +'<ul>'
-  +'<form method="POST" action="/">'
-  +'<input type="text" name="item">'
-  +'<input type="submit" value="提交">'
-  +'</form>'
-  +'</body></html>';
- 
+                                case 'POST':
+                                  add(req, res);
+                                        break;
+
+                                            default:
+                                              err(res);
+                                                    break;
+                                                      
+        }
+
+}).listen(8080);
+
+function err(res) {
+    var msg = 'Not found';
+    res.writeHead(404, {
+          'Content-Length': msg.length,
+          'Content-Type': 'text/plain'
+        
+    });
+      res.end(msg);
+
 }
 
+function show(res) {
+    var html = fs.readFileSync('./template.html').toString('utf8'),
+              items_html = items.map(function(item) {return '      <li>' + item + '</li>';}).join('\n');
+
+      html = html.replace('%', items_html); 
+      res.writeHead(200, {
+            'Content-Type': 'text/html',
+            'Content-Length': Buffer.byteLength(html),
+            'Access-Control-Allow-Origin': '*'
+          
+      });
+
+        res.end(html);
+
+}
+
+function add(req, res) {
+    var body = '';
+
+      req.on('data', function(chunk) { body += chunk;  });
+      req.on('end', function() {
+            var item = qs.parse(body).item;
+                if(item !== '') {  items.push(item);   }
+
+                    show(res);
+                      
+      });
+
+}
