@@ -32,6 +32,10 @@ app.post('/login', function(req, res){
           }
           res.setHeader('Set-cookie', `count=${count}; max-age=10000000`);
           res.end(`<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>状态保持</title></head><body><h1>${req.body.username}你这是第 ${count} 次访问本网站！</h1></body></html>`);
+    }else if(req.body.username!='zhangsan'){
+        res.end(`<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>状态保持</title></head><body><h1>用户名错误，请重新输入</h1></body></html>`);
+    }else if(req.body.pwd!='123'){
+        res.end(`<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>状态保持</title></head><body><h1>密码错误，请重新输入</h1></body></html>`);
     }
 });
 app.listen(8081,function(){});
