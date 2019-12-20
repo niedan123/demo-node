@@ -8,6 +8,6 @@ log('execPath:%s\n',process.execPath);
 
 log('node.js ver:',process.version);
 log('uid',process.getuid());
-log('git,',process.getuid());
+log('git,',process.getgid());
 log('cwd:%s\n',process.cwd());
 

@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="x-ua-compatible" content="ie=edge">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+
+		<title>IM</title>
+	
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/bootstrap-theme.min.css">
+		<link rel="stylesheet" type="text/css" href="css/sprite.css" />
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+		<link rel="stylesheet" type="text/css" href="css/ux_1462265947_5562909/demo.css" />
+		<link rel="stylesheet" type="text/css" href="css/iScroll.css" />
+		<link rel="stylesheet" type="text/css" href="css/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="css/sco.message.css" />
+		<link rel="stylesheet" type="text/css" href="js/dist/bootstrap-tagsinput.css" />
+	
+		<link rel="stylesheet" type="text/css" href="css/media.css" />
+
+
+		<script src="js/jquery-3.1.0.min.js" type="text/javascript" charset="utf-8" ></script>
+		<script src="js/pako.js" type="text/javascript" charset="utf-8" ></script>
+		<script src="js/base64.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/emoji.js" type="text/javascript" charset="utf-8" ></script>
+		<script src="js/MD5.min.js" type="text/javascript" charset="utf-8" ></script>
+		<script src="https://app.cloopen.com/im50/ytx-web-im-min-5.3.2r14.js" type="text/javascript" charset="utf-8"></script>
+
+		
+		<style type="text/css">
+			@media all and (orientation:landscape) and (max-width:700px) {
+				body {
+					-ms-flex-align: baseline;
+					-webkit-align-items: baseline;
+					-webkit-box-align: baseline;
+					align-items: baseline;
+				}
+			}
+		</style>
+		<script type="text/javascript">
+		
+			if(navigator.userAgent.match(/IEMobile\/10\.0/)) {
+				var msViewportStyle = document.createElement('style')
+				msViewportStyle.appendChild(
+					document.createTextNode(
+						'@-ms-viewport{width:auto!important}'
+					)
+				)
+				document.querySelector('head').appendChild(msViewportStyle)
+			}
+		</script>
+		<script>
+			var nua = navigator.userAgent;
+			var is_android = ((nua.indexOf('Mozilla/5.0') > -1 && nua.indexOf('Android ') > -1 && nua.indexOf('AppleWebKit') > -1) && !(nua.indexOf('Chrome') > -1));
+			if(is_android) {
+				$('select.form-control').removeClass('form-control').css('width', '100%');
+			}
+		</script>
+	</head>
+
+	<body>
+		
+		<div class="container">
+			
+			<div class="col-lg-2 chat_group">
+
+			
+
+				<div class="col-lg-12  contact_list ">
+					
+					<div class="searchDiv">
+						<input type="text" id="add_chat" value="" placeholder="添加聊天" /><label data-button="addToChat" class="addToChat" style="font-size: 18px; color: #ccc; margin-left: 5px; cursor: pointer;">+</label>
+					</div>
+				
+					<ul class="discuss normal_chat contact_top" >
+					
+					</ul>
+
+				
+					<ul class="discuss normal_chat" data-list="chat">
+					
+					</ul>
+				</div>
+
+				<div class="col-lg-12 group_list  hide_list ">
+					<div class="searchDiv">
+						<input type="text" id="searchGroup" value="" placeholder="搜索" />
+					</div>
+					<ul class="discuss">
+					</ul>
+				</div>
+			</div>
+			
+			<div class="col-lg-6 chat_group_window rlist" data-window-type="chat" data-chat-with="" data-chat-type="null">
+				<div class="receiver">
+				
+					<span class="img video right" data-voip="video"></span>
+					<span class="img audio right" data-voip="audio"></span>
+					<span class="group_set right" data-gruopid="null"></span>
+				</div>
+				<div class="chatting">
+					<div class="chats iScroll">
+						
+					</div>
+				</div>
+				<div class="inputText">
+					<span class="img expression"></span>
+					<span class="img picture" data-send="pic"></span>
+					<span class="img file" data-send="file"></span>
+					<span class="img burnmsg" data-firemsg="false"></span>
+					<span class="img photograph" data-takepic="1"></span>
+					<button class="sendB right" data-button="send_msg">发送</button>
+					<div class="inputSend">
+						<div class="col-lg-10 char_input" contenteditable="true" data-chat-input="chatinput"></div>
+					</div>
+					<ul class="atMsg">
+					</ul>
+				</div>
+			</div>
+			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 rlist " style="display: none;">
+				<div class="receiver">
+				</div>
+				<div class="videoPhone">
+					<img src="img/toux.png" alt="" />
+					<p class="name"></p>
+					<p></p>
+					<span></span>
+					<span></span>
+					<div>
+						<button class="talkBtn"><span class="contact talk "></span>与他沟通(IM)</button>
+						<div><button class="conversationBtn"><span class="contact conversation "></span>音频通话</button><button class="videoBtn"><span class="contact video "></span>视频通话</button></div>
+					</div>
+				</div>
+			</div>
+			<div class="callmsg_alert col-lg-3">
+			
+
+			</div>
+		</div>
+
+		<div class="video_view" data-video-with="0" data-call-state="1" data-call-type="1">
+			<p class="video_drop"></p>
+			<video class="video_long_distance" data-video="distance" autoplay controls></video>
+			<video class="video_local" data-video="local"  autoplay muted controls></video>
+			<p class="video_bottom">
+				<span class="hangup" data-btn="cancelVideo">取消</span>
+				<span class="hangup" data-silence="false">关闭麦克风</span>
+				<span class="hangup" data-camera="false">关闭摄像头</span>
+			</p>
+		</div>
+
+			
+
+		<div class="modal fade  " id="login" role="dialog" aria-labelledby="gridSystemModalLabel" data-backdrop="static" >
+			
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					
+					<div class="modal-body">
+						<div class="login1">
+							<div class="form-group">
+								<input type="text" class="input-sm" id="loginByPhone" placeholder="输入手机号" maxlength="64" oninput="IM.checkLoginNum(this)" value="" autofocus>
+							</div>
+							<div class="error">
+								对不起，您输入的账号不合法
+							</div>
+							<button type="button" class="btn login" onclick="IM.Do_login(this)">登陆</button>
+						</div>
+
+						<div class="login2">
+							<input type="text" class="input-sm" id="voip_account" placeholder="VoIp号码" value="">
+							<input type="password" class="input-sm" id="voip_pwd" placeholder="VoIp密码" value="">
+							<div class="loginSet">
+							
+								<div class="error">
+									对不起，您输入的密码不正确
+								</div>
+							</div>
+							<button type="button" class="btn login" onclick="IM.Do_login_byVoip()">登陆</button>
+						</div>
+
+						<div class="loginfooter">
+							<span class="changeLogin">切换登陆模式</span>|<span>About</span>
+						</div>
+					</div>
+				</div>
+			
+			</div>
+		
+		</div>
+	
+			
+		
+		
+		<div class="modal fade" id="firemsg" role="dialog" aria-labelledby="gridSystemModalLabel" data-drop="true">
+			
+		</div>
+		<div class="emoji_div" id="eMoji">
+			<div class="arrow"></div>
+			<div class="popover-content" style="max-height: 120px; font-size:18px; overflow-y: auto">
+			</div>
+		</div>
+		<div class="cam_div" id="camlist">
+			<ul></ul>
+		</div>
+		
+		<div id="takePic">
+			<video width="300" height="300" id="picshow" autoplay="" controls src=""></video>
+			<button id="snap"></button>
+			<span id="snapCancle">取消</span>
+		</div>
+	
+
+		<div class="hide">
+			<input type="file" name="sendPic" id="sendPic" value=""  multiple="multiple"/>
+			<input type="file" name="sendFile" id="sendFile" value="" multiple="multiple" />
+			<audio src="js/ring.mp3" id="im_ring"></audio>
+			<audio src="" id="voiceMsg"></audio>
+			<audio src="js/ringback.wav" id="call_ring" loop="-1"></audio>
+			<pre style="display: none;" id="temporary"></pre>
+		</div>
+
+		<script src="js/justdo.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/sco.message.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/dist/bootstrap-tagsinput.min.js" type="text/javascript" charset="utf-8"></script>
+		
+		<script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/emoji.js" type="text/javascript" charset="utf-8"></script>
+		
+		<script type="text/javascript">	
+
+			$(function() {
+				$('li:has(.contacts)').click(function(){
+					if ($(document).width()< 740){
+						$('.contact_list').css('visibility','visible');
+					}
+
+				})
+				$('li:has(.communicate)').click(function(){
+					if ($(document).width()< 740) {
+						$('.chat_list').css('visibility', 'visible');
+					}
+				})
+				$('li:has(.group)').click(function(){
+					if ($(document).width()< 740) {
+						$('.group_list').css('visibility', 'visible');
+					}
+				})
+
+				$('.nav>li').click(function(){
+					if ($(document).width()< 740) {
+						$('.rlist').addClass('addrlist');
+					}
+
+				})
+				$('.rlist').click(function(){
+					if ($(document).width()< 740) {
+						if ($('.rlist').hasClass('addrlist')) {
+							$('.rlist').toggleClass('addrlist');
+							$('.chat_group>div').css('visibility', 'hidden');
+						}
+					}
+				});
+				
+				$(document).on("click",".chat_group",function(e){
+					$(this).toggleClass('act');
+				})
+				
+				$('.groupSet label').click(function() {
+					var radioId = $(this).attr('name');
+					if($(this).hasClass('checked')) {
+						$(this).removeClass('checked');
+						$('#' + radioId).attr('checked', false);
+					} else {
+						$(this).addClass('checked');
+						$('#' + radioId).attr('checked', true);
+					}
+				});
+				$(document).on('click', ".changeLogin", function(e) {
+					switch(IM.login_type) {
+						case 1: // 手机号登录
+							$('.login2').show();
+							$('.login1').hide();
+							IM.login_type = 3;
+							break;
+						case 2: //  VOIP账号登陆
+							$('.login1').show();
+							$('.login2').hide();
+							IM.login_type = 1;
+							break;
+						default:
+							$('.login2').hide();
+							$('.login1').show();
+							IM.login_type = 1;
+							break;
+					};
+				});
+			});
+			$("#login").modal("toggle");
+
+			function hide_show(show, hide_1, hide_2) {
+				
+				$('.chat_group').addClass("act");
+				
+				if($('.' + show).hasClass("hide_list")) {
+					$('.' + show).removeClass("hide_list");
+				}
+				if(!$('.' + hide_1).hasClass("hide_list")) {
+					$('.' + hide_1).addClass("hide_list");
+				}
+				if(!$('.' + hide_2).hasClass("hide_list")) {
+					$('.' + hide_2).addClass("hide_list");
+				}
+			}
+
+			var navList = $('.nav');
+			navList.find("li").click(function(e) {
+				var _index = $(this).index();
+				navList.find(".active").removeClass("active");
+				$(this).addClass("active");
+				switch(_index) {
+					case 0:
+						hide_show("chat_list", "group_list", "contact_list ");
+						break;
+					case 1:
+						hide_show("contact_list", "chat_list", "group_list ");
+						break;
+					case 2:
+						hide_show("group_list", "chat_list", "contact_list ");
+						break;
+					default:
+						break;
+				};
+
+			});
+
+			function chatGroup() {
+				$('.rlist').hide();
+				$('.chat_group_window').show();
+			};
+			var m = $('.more_body_right dl').children('dd');
+			$('.more_body_left').on("click", 'li', function() {
+				$('.more_body_left').find('.active').removeClass('active');
+				$(this).addClass('active');
+				var i = $(this).index();
+				m.hide();
+				m.eq(i).show();
+			});
+
+			$('.closeMore').click(function(e) {
+				$('#aboutMore').modal('hide');
+			});
+			$('.openMore').click(function(e) {
+
+				$('#aboutMore').modal('show');
+			});
+			$('.searchWay').click(function(e) {
+				$(this).siblings('.active').removeClass('active');
+				$(this).addClass('active');
+				var ins = $(this).index();
+				$('#searchWayValue input').eq(ins).click();
+				var s = $('#searchWayValue').serialize();
+			});
+
+
+            var st = RL_YTX.getCamera(function (e) {
+                console.log(e);
+            });
+		</script>
+	</body>
+
+</html>
